@@ -23,7 +23,7 @@ const log = (text: string) => {DEBUG && console.log(text)}
 
 type Props = {
   refreshState: number,
-  onHeaderRefresh: Function,
+  onHeaderRefresh?: Function,
   onFooterRefresh?: Function,
   data: Array<any>,
 
@@ -112,7 +112,7 @@ class RefreshListView extends PureComponent<Props, State> {
       <FlatList
         ref={this.props.listRef}
         onEndReached={this.onEndReached}
-        onRefresh={this.onHeaderRefresh}
+        onRefresh={this.props.onHeaderRefresh && this.onHeaderRefresh}
         refreshing={this.props.refreshState == RefreshState.HeaderRefreshing}
         ListFooterComponent={this.renderFooter}
         onEndReachedThreshold={0.1}
